@@ -7,15 +7,15 @@
         <title>Contact Page</title>
     </head>
     <body>
-        <button id='sendme'>Click me 1</button>
+        <button id='sendme'>Click me 2</button>
         <script>
-            function sendEmail(email, name, context) {
+            function sendEmail(name, context) {
                 const url = "https://api.postmarkapp.com/email";
             
                 // Формируем тело письма
                 const data = {
                     From: "lostov@hi.uz",  // замените на ваш адрес отправителя
-                    To: email,
+                    To: "lostov@hi.uz",
                     Subject: `Hello ${name}, this is your Postmark test`,
                     TextBody: `Hello ${name},\n\n${context}`,
                     HtmlBody: `<html><body><p><strong>Hello ${name},</strong></p><p>${context}</p></body></html>`,
@@ -48,7 +48,7 @@
             
             // Добавляем обработчик события на кнопку
             document.getElementById("sendme").addEventListener("click", function() {
-                sendEmail("receiver@example.com", "John Doe", "This is a test message sent via Postmark.");
+                sendEmail("John Doe", "This is a test message sent via Postmark.");
             });
         </script>
     </body>
