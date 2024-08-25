@@ -7,7 +7,7 @@
         <title>Contact Page</title>
     </head>
     <body>
-        <button id='sendme'>Click me</button>
+        <button id='sendme'>Click me 1</button>
         <script>
             function sendEmail(email, name, context) {
                 const url = "https://api.postmarkapp.com/email";
@@ -29,7 +29,8 @@
                         "Content-Type": "application/json",
                         "X-Postmark-Server-Token": "f31c0938-5312-4077-b124-6252bdb5e71c"  // замените на ваш реальный токен
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data),
+                    mode: 'no-cors' // Установка режима 'no-cors'
                 })
                 .then(response => {
                     if (!response.ok) {
