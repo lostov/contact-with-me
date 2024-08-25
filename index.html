@@ -6,5 +6,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact Page</title>
     </head>
-    <body>HELLO</body>
+    <body>
+        <button id='sendme'>Click me</button>
+        <script>
+            function sendEmail(email, name, context) {
+                const url = "https://api.postmarkapp.com/email";
+            
+                // Формируем тело письма
+                const data = {
+                    From: "lostov@hi.uz",  // замените на ваш адрес отправителя
+                    To: email,
+                    Subject: `Hello ${name}, this is your Postmark test`,
+                    TextBody: `Hello ${name},\n\n${context}`,
+                    HtmlBody: `<html><body><p><strong>Hello ${name},</strong></p><p>${context}</p></body></html>`,
+                    MessageStream: "outbound"
+                };
+            
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "X-Postmark-Server-Token": "f31c0938-5312-4077-b124-6252bdb5e71c"  // замените на ваш реальный токен
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok " + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Email sent successfully:", data);
+                })
+                .catch(error => {
+                    console.error("Error sending email:", error);
+                });
+            }
+            
+            // Добавляем обработчик события на кнопку
+            document.getElementById("sendme").addEventListener("click", function() {
+                sendEmail("receiver@example.com", "John Doe", "This is a test message sent via Postmark.");
+            });
+        </script>
+    </body>
+
+    
 </html>
